@@ -26,18 +26,30 @@
     </footer>
 
     <script type="text/babel">
+        const { useState } = React;
+
         const ListaAnimali = () => {
-            const animali = ["Cane", "Gatto", "Coniglio", "Leone", "Tigre"];
+            const [animali, setAnimali] = useState([])
+            const animalsChoices = ["Cane", "Gatto", "Coniglio", "Leone", "Tigre"];
+
+            const addAnimali = () => {
+                const randomIndex = Math.floor(Math.random() * animalsChoices.length);
+                const nuovoAnimale = animalsChoices[randomIndex];
+                setAnimali([...animali, nuovoAnimale])
+            }
 
             return (
-                <details>
-                    <summary>Animali</summary>
-                    <ul>
-                        {animali.map((a, index) => (
-                            <li key={index}>{a}</li>
-                        ))}
-                    </ul>
-                </details>
+                <div>
+                    <button onClick={addAnimali}>Aggiungi animale</button>
+                    <details>
+                        <summary>Animali</summary>
+                        <ul>
+                            {animali.map((a, index) => (
+                                <li key={index}>{a}</li>
+                            ))}
+                        </ul>
+                    </details>
+                </div>
             )
         }
 
